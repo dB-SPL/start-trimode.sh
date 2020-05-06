@@ -148,10 +148,10 @@ launch_garim(){
 }
 
 launch_conky
+launch_pavucontrol
 launch_flrig
 launch_fldigi
 launch_js8call
-launch_pavucontrol
 launch_rigctld
 launch_piardopc
 launch_piardop_gui
