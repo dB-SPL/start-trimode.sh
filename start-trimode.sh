@@ -9,6 +9,21 @@ launch_conky(){
 		fi
 }
 
+launch_pavucontrol(){
+		pavucontrol_pid=$(pidof pavucontrol)
+		if [[ $pavucontrol_pid = "" ]]
+			then xdotool set_desktop 1
+			app_window=""
+			pavucontrol &
+			sleep 2
+			until [ $app_window != "" ]; do
+				app_window=$(xdotool search --name "volume control");
+				sleep 1;
+			done
+		xdotool search --name "volume control" windowminimize
+		fi
+}
+
 launch_flrig(){
 		flrig_pid=$(pidof flrig)		
 		if [[ $flrig_pid = "" ]]
@@ -65,21 +80,6 @@ launch_js8call(){
 				app_window=$(xdotool search --name "js8call de kn4crd");
 				sleep 1;
 			done
-		fi
-}
-
-launch_pavucontrol(){
-		pavucontrol_pid=$(pidof pavucontrol)
-		if [[ $pavucontrol_pid = "" ]]
-			then xdotool set_desktop 1
-			app_window=""
-			pavucontrol &
-			sleep 2
-			until [ $app_window != "" ]; do
-				app_window=$(xdotool search --name "volume control");
-				sleep 1;
-			done
-		xdotool search --name "volume control" windowminimize
 		fi
 }
 
