@@ -1,5 +1,5 @@
 # start-trimode.sh
-A shell script to start ham radio apps
+start-trimode.sh is a shell script to start ham radio apps in a multi-desktop environment.  It's written for use on a Raspberry Pi, but it can be adapted to any version of Linux.
 
 This is a rough draft.  Parts of it are hard-coded for my setup, and require work to make it more "universal".
 
