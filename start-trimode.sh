@@ -1,5 +1,46 @@
 #!/bin/bash
 
+get_desk(){
+# Get current desktop number so we can return there after the script
+	desk_num=$(xdotool get_desktop)
+}
+
+get_time(){
+# Get current time in UTC
+	h=$(date -u +%H)
+	m=$(date -u +%M)
+	time=$h$m
+}
+
+# CPU Usage Function
+cpu_check(){
+	arg1=$1
+	declare -i app_pid
+	declare -i app_cpu
+	declare -i cpu_limit
+	app_name=$arg1
+	app_cpu=`ps aux | grep $app_name | grep -v grep | awk {'print $3*100'}`
+	if [[ $app_cpu > 9000 ]]
+		then sleep 60
+		app_cpu=`ps aux | grep $app_name | grep -v grep | awk {'print $3*100'}`
+		if [[ $app_cpu > 9000 ]]
+			then killall $app_name
+		fi
+	fi
+}
+
+# Send frequency to rigctld to change frequencies
+set_freq(){
+	freq=$1
+	echo F $freq | netcat -w 1 localhost 4532
+}
+
+# Get frequency from rigctld
+get_freq(){
+	freq=$(echo f | netcat -w 1 localhost 4532)
+	freq=${freq%"'n/"}
+}
+
 # Launch apps on specific desktops
 
 launch_conky(){
@@ -147,14 +188,30 @@ launch_garim(){
 		fi
 }
 
-launch_conky
-launch_pavucontrol
-launch_flrig
-launch_fldigi
-launch_js8call
-launch_rigctld
-launch_piardopc
-launch_piardop_gui
-launch_garim
+# Loop through the commamds, then wait 5 minutes
+while [ 1 ]
+do
+	desk_num=$(xdotool get_desktop)
+	cpu_check conky
+	launch_conky
+	cpu_check pavucontrol
+	launch_pavucontrol
+	cpu_check flrig
+	launch_flrig
+	cpu_check fldigi
+	launch_fldigi
+	cpu_check js8call
+	launch_js8call
+	cpu_check rigctld
+	launch_rigctld
+	cpu_check piardopc
+	launch_piardopc
+	cpu_check piARDOP_GUI
+	launch_piardop_gui
+	cpu_check garim
+	launch_garim
+	xdotool set_desktop $desk_num
+	sleep 5m
+done
 
 exit
