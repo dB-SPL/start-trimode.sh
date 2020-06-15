@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Start Tri-Mode
+GenericName=Start Trimode
+Comment=Ardop & PAT status tool
+Exec=/home/pi/start-trimode/start-trimode.sh reset
+Icon=/home/pi/start-trimode/start-trimode-icon.png
+Terminal=false
+Type=Application
+Categories=Network;HamRadio;
+Path=~/start-trimode
