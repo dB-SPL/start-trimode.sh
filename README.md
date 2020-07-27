@@ -8,4 +8,4 @@ flrig fldigi flmsg flamp JS8Call piARDOPC piARDOP_GUI gARIM
 
 It also requires xdotool to control the apps and switch desktops, so if you don't already have that installed, you'll need to install it. In a terminal window, type:
 
-sudo apt-get update supdo apt-get upgrade sudo apt-get install xdotool
+sudo apt-get update && supdo apt-get upgrade && sudo apt-get install xdotool -y
